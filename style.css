@@ -159,3 +159,10 @@ button{
 .modal.is-open {
   display: block;
 }
+
+
+.project-card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 10px;
+}
