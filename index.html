@@ -9,6 +9,7 @@
         <title>Document</title>
     </head>
     <body>
+        <button id="theme-toggle">Змінити тему</button>
         <header>
             <h1 class="header-card">Ювшин Максим</h1>
             <nav>
@@ -16,7 +17,7 @@
                 <a href="#skills">Навички</a>
                 <a href="#projects">Мої проекти</a>
                 <a href="#contacts">Контакти</a>
-            </nav>
+            </nav>  
         </header>
 
         <main>
@@ -34,15 +35,25 @@
             <section id = "projects" class = "project-card">
                 <h2>Мої проекти</h2>
                 <article>
-                    <h3>Проект 1</h3>
-                    <p>Мобільна гра "Стратеми"</p>
+                    <ul id="projects-list"></ul>
                 </article>
             </section>
         </main>
 
         <footer>
             <h2 id = "contacts">Мої контакти</h2>
+            <button id="open-modal">Контакти</button>
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <button id="close-modal">Закрити</button>
+                    <form id="contact-form">
+                    <input type="text" id="user-name" placeholder="Ваше ім'я">
+                    <button type="submit">Надіслати</button>
+                    </form>
+                </div>
+            </div>
             <p>© 2026 Ювшин Максим</p>
         </footer>
+        <script src="script.js"></script>
     </body>
 </html>
