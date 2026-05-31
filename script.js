@@ -16,56 +16,67 @@ if (openBtn && closeBtn && modal) {
   document.addEventListener('keydown', (e) => { if(e.key === 'Escape') modal.classList.remove('is-open') });
 }
 
+
 const projects = [
   { id: 1, title: "Сайт-візитка", tech: "HTML/CSS" },
   { id: 2, title: "Todo App", tech: "JavaScript" },
   { id: 3, title: "Портфоліо", tech: "HTML/CSS/JS" }
 ];
 
-const container = document.querySelector('#projects-container');
-const searchInput = document.querySelector('#search-input');
-
-function createProjectCard(project) {
-  return `<div class="project-card"><h3>${project.title}</h3><p>${project.tech}</p></div>`;
-}
+const projectsContainer = document.querySelector('#projects-container');
+const searchProjectsInput = document.querySelector('#search-projects'); // Виправлено ID
 
 function renderProjects(list) {
-  if (!container) return;
-  container.innerHTML = list.map(project => createProjectCard(project)).join('');
+  if (!projectsContainer) return;
+  projectsContainer.innerHTML = list.map(project => `
+    <div class="project-card"><h3>${project.title}</h3><p>${project.tech}</p></div>
+  `).join('');
 }
-
 
 renderProjects(projects);
 
-if (searchInput) {
-  searchInput.addEventListener('input', () => {
-    const value = searchInput.value.toLowerCase();
+if (searchProjectsInput) {
+  searchProjectsInput.addEventListener('input', (e) => {
+    const value = e.target.value.toLowerCase();
     const filtered = projects.filter(p => p.title.toLowerCase().includes(value));
     renderProjects(filtered);
   });
 }
 
+let allPosts = [];
+const postsContainer = document.querySelector('#posts-container');
+const searchPostsInput = document.querySelector('#search-posts');
+
+function renderPosts(list) {
+  if (!postsContainer) return;
+  postsContainer.innerHTML = list.map(post => `
+    <div class="post">
+      <h3>${post.title}</h3>
+      <p>${post.body}</p>
+    </div>
+  `).join('');
+}
+
 async function loadPosts() {
   const loading = document.querySelector('#loading');
-  const postsContainer = document.querySelector('#posts-container');
-
   try {
     const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-    if (!response.ok) throw new Error('Помилка');
-    
+    if (!response.ok) throw new Error('Помилка сервера');
     const data = await response.json();
-    
-    postsContainer.innerHTML = data.slice(0, 5).map(post => `
-      <div class="post">
-        <h3>${post.title}</h3>
-        <p>${post.body}</p>
-      </div>
-    `).join('');
-    
+    allPosts = data.slice(0, 10);
+    renderPosts(allPosts);
     if (loading) loading.style.display = 'none';
   } catch (error) {
-    if (loading) loading.textContent = 'Помилка завантаження даних';
+    if (loading) loading.textContent = 'Помилка завантаження';
   }
 }
 
 loadPosts();
+
+if (searchPostsInput) {
+  searchPostsInput.addEventListener('input', (e) => {
+    const value = e.target.value.toLowerCase();
+    const filtered = allPosts.filter(post => post.title.toLowerCase().includes(value));
+    renderPosts(filtered);
+  });
+}
