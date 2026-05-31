@@ -79,6 +79,7 @@ button:focus {
     --text-color: #ffffff;
     --bg-color: #ffffff;
     --footer-color: #000000;
+    --post-color: #000000; 
 }
 
 html {
@@ -149,6 +150,7 @@ button{
 .dark-theme {
   background-color: #000000;
   --footer-color: #ffffff;
+  --post-color: #ffffff;
 }
 
 
@@ -165,4 +167,17 @@ button{
   border: 1px solid #ccc;
   padding: 15px;
   margin-bottom: 10px;
+}
+
+
+.post {
+  color: var(--post-color);
+  border: 1px solid var(--post-color);
+  border-radius: 30px;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+.posts-text{
+  color: var(--post-color);
 }
